@@ -12,9 +12,10 @@ builder.Services.AddDbContext<SalesWebMvcContext>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
-
 //builder.Services.AddDbContext<SalesWebMvcContext>(options =>
 //    options.UseMySql(builder.Configuration.GetConnectionString("SalesWebMvcContext") ?? throw new InvalidOperationException("Connection string 'SalesWebMvcContext' not found.")));
+
+builder.Services.AddScoped<SeedingService>();
 
 var app = builder.Build();
 
@@ -25,6 +26,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedingService>().Seed();
 
 app.UseHttpsRedirection();
 app.UseRouting();
