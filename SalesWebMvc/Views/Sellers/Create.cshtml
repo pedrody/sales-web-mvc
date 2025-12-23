@@ -13,7 +13,7 @@
         <form asp-action="Create">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div>
-                <label asp-for="Seller.Name" class="form-label mt-4"></label>
+                <label asp-for="Seller.Name" class="form-label"></label>
                 <input asp-for="Seller.Name" class="form-control">
                 <span asp-validation-for="Seller.Name" class="text-danger"></span>
             </div>
@@ -40,6 +40,7 @@
 
             <div>
                 <input type="submit" value="Create" class="btn btn-success mt-4">
+                <a asp-action="Index" class="btn btn-link mt-4">Back to list</a>
             </div>
 
         </form>
